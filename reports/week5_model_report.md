@@ -19,9 +19,9 @@ Chosen over linear regression because:
 ## Results
 | Metric | Value | Interpretation |
 |--------|-------|----------------|
-| MAE    | XXXX  | Average error per day per store |
-| RMSE   | XXXX  | Penalizes large errors more |
-| RMSPE  | X.XX% | Official Rossmann metric (< 15% is good) |
+| MAE    | 274.05  | Average error per day per store |
+| RMSE   | 350.44  | Penalizes large errors more |
+| RMSPE  | 6.13% | Official Rossmann metric (< 15% is good) |
 
 ## Key findings from feature importance
 1. Sales_Lag7 — most predictive (recent history = best signal)
