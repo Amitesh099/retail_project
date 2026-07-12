@@ -1,5 +1,7 @@
 # Retail Sales Optimization — ABC Retail Corp
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://capstone-retail-group2.streamlit.app/)
+
 ## Overview
 
 This repository contains the Data Engineering capstone project for ABC Retail Corp.
@@ -211,10 +213,8 @@ The project includes a live interactive dashboard deployed using Streamlit Commu
 Live dashboard link:
 
 ```text
-STREAMLIT_LINK
+https://capstone-retail-group2.streamlit.app/
 ```
-
-Note: Replace `STREAMLIT_LINK` with the actual Streamlit dashboard URL after deployment.
 
 ---
 
@@ -228,6 +228,7 @@ Note: Replace `STREAMLIT_LINK` with the actual Streamlit dashboard URL after dep
 | Pipeline scripts | `pipeline/` | Automated ETL workflow |
 | Reports | `reports/` | Weekly and final documentation |
 | Dashboard app | `dashboard/app.py` | Interactive dashboard |
+| Live dashboard | https://capstone-retail-group2.streamlit.app/ | Public deployed dashboard |
 
 ---
 
@@ -293,6 +294,7 @@ Team 2
 | Forecasting model | Completed |
 | Static visualizations | Completed |
 | Interactive dashboard | Completed |
+| Live dashboard deployment | Completed |
 | Final report | Completed |
 | Presentation | Completed |
 

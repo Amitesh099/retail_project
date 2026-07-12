@@ -34,6 +34,12 @@ Raw CSV data
 
 The project uses Python, Pandas, Scikit-learn, Plotly, Streamlit, and Jupyter notebooks. The final output includes cleaned datasets, pipeline scripts, model evaluation, visual reports, and an interactive dashboard.
 
+Live dashboard:
+
+```text
+https://capstone-retail-group2.streamlit.app/
+```
+
 The Random Forest forecasting model achieved the following results:
 
 | Metric | Value |
@@ -441,13 +447,11 @@ Deployment platform:
 Streamlit Community Cloud
 ```
 
-Dashboard link:
+Live dashboard link:
 
 ```text
-STREAMLIT_LINK
+https://capstone-retail-group2.streamlit.app/
 ```
-
-Note: Replace `STREAMLIT_LINK` with the actual Streamlit dashboard link after deployment.
 
 ---
 
@@ -606,6 +610,12 @@ Open Jupyter Notebook and run the notebooks in order:
 streamlit run dashboard/app.py
 ```
 
+### Step 6: Open the Live Dashboard
+
+```text
+https://capstone-retail-group2.streamlit.app/
+```
+
 ---
 
 ## 17. Final Deliverables
@@ -621,7 +631,7 @@ streamlit run dashboard/app.py
 | Notebooks | `notebooks/` |
 | Reports | `reports/` |
 | Interactive dashboard | `dashboard/app.py` |
-| Live dashboard | `STREAMLIT_LINK` |
+| Live dashboard | https://capstone-retail-group2.streamlit.app/ |
 
 ---
 
