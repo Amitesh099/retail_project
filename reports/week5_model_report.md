@@ -1,39 +1,113 @@
 # Week 5 Report — Predictive Modeling
 
-## Problem statement
-Predict daily sales for each Rossmann store for the next month
-to support inventory planning and revenue forecasting.
+## Problem Statement
 
-## Model chosen: Random Forest Regressor
-Chosen over linear regression because:
-- Handles non-linear relationships (promotions, seasonality)
-- No feature scaling required
-- Built-in feature importance
-- Robust to outliers
+The objective of Week 5 was to build a predictive model to forecast daily store-level sales for ABC Retail Corp using the cleaned and feature-engineered Rossmann Store Sales dataset.
 
-## Train/test split
-- Method: time-based (not random) to prevent data leakage
-- Train: Jan 2013 – Apr 2015
-- Test: May 2015 – Jul 2015
+The forecast output can support inventory planning, promotion planning, staffing decisions, and revenue estimation.
 
-## Results
+---
+
+## Model Chosen
+
+The selected model was:
+
+```text
+Random Forest Regressor
+```
+
+Random Forest was chosen because:
+
+- It handles non-linear relationships well.
+- It works effectively with tabular business data.
+- It can use both numerical and encoded categorical features.
+- It is robust to outliers.
+- It provides feature importance values.
+- It does not require heavy feature scaling.
+
+---
+
+## Target Variable
+
+The target variable for prediction was:
+
+```text
+Sales
+```
+
+The model was trained to predict daily sales for each store.
+
+---
+
+## Train/Test Split
+
+A time-based train/test split was used instead of a random split.
+
+| Dataset | Period |
+|---|---|
+| Training data | January 2013 to April 2015 |
+| Test data | May 2015 to July 2015 |
+
+A time-based split was selected because this is a forecasting problem. Random splitting could allow future data patterns to leak into the training set, which would make the model result look unrealistically good.
+
+---
+
+## Model Results
+
 | Metric | Value | Interpretation |
-|--------|-------|----------------|
-| MAE    | 274.05  | Average error per day per store |
-| RMSE   | 350.44  | Penalizes large errors more |
-| RMSPE  | 6.13% | Official Rossmann metric (< 15% is good) |
+|---|---|---|
+| MAE | 718.74 | On average, predictions were off by about 719 sales units |
+| RMSE | 1068.83 | Larger errors were penalized more strongly |
+| RMSPE | 13.16% | Percentage-based forecasting error |
 
-## Key findings from feature importance
-1. Sales_Lag7 — most predictive (recent history = best signal)
-2. Store_AvgSales — store baseline matters
-3. Sales_MA7 — short-term trend
-4. DayOfWeek — weekly patterns strong
-5. Promo — promotions have clear uplift effect
+The RMSPE value of 13.16% indicates that the model produced acceptable forecasting performance for a beginner-level retail sales forecasting pipeline.
 
-## Business insights
-- Top 10 stores account for X% of predicted revenue
-- Stores with Promo=1 show X% higher predicted sales
-- Weekend sales X% lower than weekday average
+---
 
-## AI tools used
-- claude
+## Important Features
+
+The most useful features for prediction included:
+
+| Feature | Business Meaning |
+|---|---|
+| Sales_Lag7 | Recent sales history from the previous week |
+| Store_AvgSales | Average sales level of each store |
+| Sales_MA7 | Short-term moving average trend |
+| Sales_MA30 | Longer-term moving average trend |
+| DayOfWeek | Weekly sales pattern |
+| Promo | Promotion effect |
+| StoreType | Store category effect |
+
+These features helped the model understand store behavior, promotion impact, and time-based sales patterns.
+
+---
+
+## Business Insights
+
+- Recent sales history is one of the strongest predictors of future sales.
+- Stores with stronger historical average sales are likely to continue performing better.
+- Promotions have a visible impact on sales and should be planned carefully.
+- Weekly sales patterns are important for staffing and inventory planning.
+- Forecasting output can help reduce stockout and overstock risk.
+
+---
+
+## Output Files
+
+The modeling phase produced the following output:
+
+```text
+data/processed/sales_forecast.csv
+```
+
+This file contains actual and predicted sales values and can be used in the dashboard for visual comparison.
+
+---
+
+## AI Tools Used
+
+- ChatGPT was used for explanation, debugging support, and report refinement.
+- GitHub Copilot was used for code completion support.
+- Claude was used for documentation review.
+
+All AI-generated suggestions were reviewed and validated before inclusion.
