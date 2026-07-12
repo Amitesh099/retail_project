@@ -16,7 +16,9 @@ st.markdown(
     "Interactive dashboard for ABC Retail Corp using the Rossmann Store Sales dataset."
 )
 
-
+# -------------------------------------------------------------------
+# Data path
+# -------------------------------------------------------------------
 DATA_PATH = (
     Path(__file__).resolve().parents[1]
     / "data"
@@ -25,6 +27,9 @@ DATA_PATH = (
 )
 
 
+# -------------------------------------------------------------------
+# Load data
+# -------------------------------------------------------------------
 @st.cache_data
 def load_data():
     df = pd.read_csv(DATA_PATH)
@@ -49,6 +54,9 @@ if missing_columns:
     st.stop()
 
 
+# -------------------------------------------------------------------
+# Sidebar filters
+# -------------------------------------------------------------------
 st.sidebar.header("Filters")
 
 min_date = df["Date"].min()
@@ -93,6 +101,9 @@ if "Promo" in filtered_df.columns:
         filtered_df = filtered_df[filtered_df["Promo"] == 0]
 
 
+# -------------------------------------------------------------------
+# KPI cards
+# -------------------------------------------------------------------
 total_sales = filtered_df["Sales"].sum()
 average_sales = filtered_df["Sales"].mean()
 total_stores = filtered_df["Store"].nunique()
@@ -108,6 +119,9 @@ col4.metric("Records", f"{total_records:,}")
 st.divider()
 
 
+# -------------------------------------------------------------------
+# Sales trend
+# -------------------------------------------------------------------
 st.subheader("Sales Trend Over Time")
 
 daily_sales = (
@@ -126,6 +140,9 @@ fig_daily = px.line(
 st.plotly_chart(fig_daily, use_container_width=True)
 
 
+# -------------------------------------------------------------------
+# Top stores and promotion impact
+# -------------------------------------------------------------------
 col5, col6 = st.columns(2)
 
 with col5:
@@ -176,6 +193,9 @@ with col6:
         st.info("Promo column not available.")
 
 
+# -------------------------------------------------------------------
+# Monthly trend
+# -------------------------------------------------------------------
 st.subheader("Monthly Sales Trend")
 
 filtered_df = filtered_df.copy()
@@ -204,58 +224,37 @@ fig_monthly = px.line(
 st.plotly_chart(fig_monthly, use_container_width=True)
 
 
-st.subheader("Forecast Output")
+# -------------------------------------------------------------------
+# Forecasting model summary
+# -------------------------------------------------------------------
+st.subheader("Forecasting Model Summary")
 
-FORECAST_PATH = (
-    Path(__file__).resolve().parents[1]
-    / "data"
-    / "processed"
-    / "sales_forecast.csv"
+col7, col8, col9 = st.columns(3)
+
+col7.metric("MAE", "718.74")
+col8.metric("RMSE", "1068.83")
+col9.metric("RMSPE", "13.16%")
+
+st.markdown(
+    """
+The sales forecasting model was built using a **Random Forest Regressor**.
+
+The model uses historical sales patterns, promotion information, date-based features,
+moving averages, lag features, and store-level attributes to predict store-level sales.
+
+The forecast output supports:
+
+- Inventory planning
+- Promotion analysis
+- Store performance monitoring
+- Sales trend understanding
+"""
 )
 
-if FORECAST_PATH.exists():
-    forecast_df = pd.read_csv(FORECAST_PATH)
 
-    actual_col = next(
-        (
-            col
-            for col in ["Actual", "actual", "Actual_Sales", "y_test"]
-            if col in forecast_df.columns
-        ),
-        None,
-    )
-
-    predicted_col = next(
-        (
-            col
-            for col in ["Predicted", "predicted", "Predicted_Sales", "y_pred"]
-            if col in forecast_df.columns
-        ),
-        None,
-    )
-
-    if actual_col and predicted_col:
-        sample_df = forecast_df.head(300).copy()
-        sample_df["Index"] = range(len(sample_df))
-
-        fig_forecast = px.line(
-            sample_df,
-            x="Index",
-            y=[actual_col, predicted_col],
-            title="Actual vs Predicted Sales",
-        )
-
-        st.plotly_chart(fig_forecast, use_container_width=True)
-    else:
-        st.write("Forecast file found, but actual/predicted columns were not detected.")
-        st.dataframe(forecast_df.head(20))
-else:
-    st.info(
-        "Forecast file `sales_forecast.csv` is not committed. "
-        "It can be generated from the modeling notebook."
-    )
-
-
+# -------------------------------------------------------------------
+# Business insights
+# -------------------------------------------------------------------
 st.subheader("Business Insights")
 
 st.markdown(
@@ -263,7 +262,7 @@ st.markdown(
 - Promotion days can be compared against non-promotion days to understand campaign impact.
 - Store-wise sales ranking helps identify high-performing and low-performing stores.
 - Monthly trends help detect seasonal demand patterns.
-- Forecast output can support better inventory planning.
-- The dashboard allows users to filter stores and dates without manually checking CSV files.
+- Forecasting supports better inventory planning and business decision-making.
+- The dashboard allows users to filter stores and dates without manually checking raw CSV files.
 """
 )
