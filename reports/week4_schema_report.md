@@ -29,7 +29,7 @@ Stored as: data/processed/rossmann_warehouse.db (SQLite)
 
 ## Output files
 - rossmann_warehouse.db — star schema SQLite database
-- rossmann_features.csv — fully engineered dataset (X cols) ready for modeling
+- rossmann_features.csv — feature-engineered dataset with 37 columns, ready for modeling
 
 ## AI tools used
 - claude
