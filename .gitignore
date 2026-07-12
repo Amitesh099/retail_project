@@ -13,6 +13,7 @@ env/
 
 # Logs
 logs/*.log
+pipeline/logs/
 
 # Large generated database files
 data/processed/*.db

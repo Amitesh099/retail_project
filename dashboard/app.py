@@ -32,13 +32,20 @@ def load_data():
     return df
 
 
+if not DATA_PATH.exists():
+    st.error(
+        "The cleaned dataset was not found. Please run `python pipeline/run_pipeline.py` first."
+    )
+    st.stop()
+
+
 df = load_data()
 
 required_columns = ["Date", "Store", "Sales"]
 missing_columns = [col for col in required_columns if col not in df.columns]
 
 if missing_columns:
-    st.error(f"Missing required columns: {missing_columns}")
+    st.error(f"Missing required columns in dataset: {missing_columns}")
     st.stop()
 
 
@@ -64,7 +71,7 @@ selected_stores = st.sidebar.multiselect(
 
 filtered_df = df.copy()
 
-if len(date_range) == 2:
+if isinstance(date_range, tuple) and len(date_range) == 2:
     start_date, end_date = date_range
     filtered_df = filtered_df[
         (filtered_df["Date"] >= pd.to_datetime(start_date))
@@ -171,6 +178,7 @@ with col6:
 
 st.subheader("Monthly Sales Trend")
 
+filtered_df = filtered_df.copy()
 filtered_df["Year"] = filtered_df["Date"].dt.year
 filtered_df["Month"] = filtered_df["Date"].dt.month
 
@@ -242,7 +250,10 @@ if FORECAST_PATH.exists():
         st.write("Forecast file found, but actual/predicted columns were not detected.")
         st.dataframe(forecast_df.head(20))
 else:
-    st.info("sales_forecast.csv not found yet. Add it later to show forecast output.")
+    st.info(
+        "Forecast file `sales_forecast.csv` is not committed. "
+        "It can be generated from the modeling notebook."
+    )
 
 
 st.subheader("Business Insights")

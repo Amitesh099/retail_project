@@ -94,13 +94,15 @@ These features helped the model understand store behavior, promotion impact, and
 
 ## Output Files
 
-The modeling phase produced the following output:
+The modeling phase can generate the following output:
 
 ```text
 data/processed/sales_forecast.csv
 ```
 
 This file contains actual and predicted sales values and can be used in the dashboard for visual comparison.
+
+If this file is not committed to GitHub, it can be regenerated from the modeling notebook.
 
 ---
 
@@ -111,3 +113,11 @@ This file contains actual and predicted sales values and can be used in the dash
 - Claude was used for documentation review.
 
 All AI-generated suggestions were reviewed and validated before inclusion.
+
+---
+
+## Conclusion
+
+Week 5 successfully implemented a sales forecasting model and documented the model results.
+
+The Random Forest model provides useful forecasting support for inventory planning, promotion decisions, and sales performance monitoring.

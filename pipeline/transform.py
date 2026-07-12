@@ -20,7 +20,7 @@ def clean_store(store: pd.DataFrame) -> pd.DataFrame:
     df["Promo2SinceYear"] = df["Promo2SinceYear"].fillna(0)
     df["PromoInterval"] = df["PromoInterval"].fillna("None")
 
-    logger.info(f"Store cleaned. Nulls remaining: {df.isnull().sum().sum()}")
+    logger.info(f"Store data cleaned. Remaining null values: {df.isnull().sum().sum()}")
     return df
 
 
@@ -31,23 +31,23 @@ def clean_train(train: pd.DataFrame) -> pd.DataFrame:
 
     df["StateHoliday"] = df["StateHoliday"].astype(str).replace("0", "none")
 
-    # Stores marked open but having zero sales are treated as closed/anomalous.
+    # Stores marked open but having zero sales are treated as anomalous/closed days.
     df.loc[(df["Open"] == 1) & (df["Sales"] == 0), "Open"] = 0
 
-    # Keep open-store days only for sales forecasting.
+    # Closed days are not useful for store-level sales forecasting.
     df = df[df["Open"] == 1].copy()
 
-    logger.info(f"Train cleaned. Open days only: {len(df)}")
+    logger.info(f"Train data cleaned. Open-store rows retained: {len(df)}")
     return df
 
 
 def merge_datasets(train: pd.DataFrame, store: pd.DataFrame) -> pd.DataFrame:
-    logger.info("Merging train and store data...")
+    logger.info("Merging train and store datasets...")
 
     df = train.merge(store, on="Store", how="left")
 
-    logger.info(f"Merged shape: {df.shape}")
-    logger.info(f"Nulls after merge: {df.isnull().sum().sum()}")
+    logger.info(f"Merged dataset shape: {df.shape}")
+    logger.info(f"Remaining null values after merge: {df.isnull().sum().sum()}")
 
     return df
 

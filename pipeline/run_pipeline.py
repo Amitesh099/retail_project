@@ -28,13 +28,13 @@ logger = logging.getLogger(__name__)
 
 
 def run():
-    logger.info("=== Pipeline started ===")
+    logger.info("=== Retail Sales ETL Pipeline Started ===")
 
     raw_data = extract_all()
     cleaned_df = run_transform(raw_data)
     output_path = load_to_csv(cleaned_df)
 
-    logger.info(f"=== Pipeline complete. Output: {output_path} ===")
+    logger.info(f"=== Pipeline Completed Successfully. Output: {output_path} ===")
 
     return cleaned_df
 

@@ -78,16 +78,9 @@ capstone_retail_project_group_2/
 │   │   ├── store.csv
 │   │   └── test.csv
 │   └── processed/
-│       ├── rossmann_cleaned.csv
-│       ├── rossmann_features.csv
-│       └── sales_forecast.csv
+│       └── rossmann_cleaned.csv
 ├── logs/
 ├── notebooks/
-│   ├── 01_data_inventory.ipynb
-│   ├── 02_data_cleaning.ipynb
-│   ├── 03_schema_and_features.ipynb
-│   ├── 04_modeling.ipynb
-│   └── 05_dashboard.ipynb
 ├── pipeline/
 │   ├── __init__.py
 │   ├── extract.py
@@ -95,17 +88,6 @@ capstone_retail_project_group_2/
 │   ├── load.py
 │   └── run_pipeline.py
 ├── reports/
-│   ├── FINAL_REPORT.md
-│   ├── week1_report.md
-│   ├── week2_cleaning_log.md
-│   ├── week3_pipeline_report.md
-│   ├── week4_schema_report.md
-│   ├── week5_model_report.md
-│   ├── dashboard_monthly_trend.png
-│   ├── dashboard_day_of_week.png
-│   ├── dashboard_promo_impact.png
-│   ├── dashboard_forecast_top5.png
-│   └── dashboard_heatmap_storetype.png
 ├── .gitignore
 ├── README.md
 └── requirements.txt
@@ -168,7 +150,9 @@ data/processed/rossmann_cleaned.csv
 
 ## How to Run the Notebooks
 
-Open Jupyter Notebook or VS Code and run the notebooks in this order:
+Open Jupyter Notebook or VS Code and run the notebooks in sequence.
+
+Suggested order:
 
 ```text
 01_data_inventory.ipynb
@@ -178,7 +162,7 @@ Open Jupyter Notebook or VS Code and run the notebooks in this order:
 05_dashboard.ipynb
 ```
 
-Each notebook represents one major phase of the project.
+The notebooks cover data inventory, cleaning, schema design, feature engineering, modeling, and visualization.
 
 ---
 
@@ -223,8 +207,8 @@ https://capstone-retail-group2.streamlit.app/
 | Output | Location | Purpose |
 |---|---|---|
 | Cleaned dataset | `data/processed/rossmann_cleaned.csv` | Cleaned and merged sales data |
-| Feature dataset | `data/processed/rossmann_features.csv` | Model-ready engineered dataset |
-| Forecast output | `data/processed/sales_forecast.csv` | Actual vs predicted sales |
+| Feature engineering | `notebooks/` | Feature generation and transformation steps |
+| Forecasting output | Generated from modeling notebook | Actual vs predicted sales output |
 | Pipeline scripts | `pipeline/` | Automated ETL workflow |
 | Reports | `reports/` | Weekly and final documentation |
 | Dashboard app | `dashboard/app.py` | Interactive dashboard |
@@ -253,6 +237,24 @@ The project uses a Random Forest Regressor to forecast sales.
 - Moving average sales features are important for forecasting.
 - Forecasting can help improve inventory planning.
 - Interactive dashboards make business insights easier to understand.
+
+---
+
+## Evidence Screenshots
+
+Important execution and dashboard screenshots are stored in:
+
+```text
+reports/screenshots/
+```
+
+Recommended screenshots:
+
+- Pipeline execution success
+- Streamlit dashboard homepage
+- Dashboard filters applied
+- Forecast section, if available
+- Public live dashboard page
 
 ---
 

@@ -20,7 +20,7 @@ def extract_train(raw_dir=RAW_DIR):
         low_memory=False,
     )
 
-    logger.info(f"Train extracted: {df.shape}")
+    logger.info(f"Train data extracted successfully. Shape: {df.shape}")
     return df
 
 
@@ -30,7 +30,7 @@ def extract_store(raw_dir=RAW_DIR):
 
     df = pd.read_csv(path)
 
-    logger.info(f"Store extracted: {df.shape}")
+    logger.info(f"Store data extracted successfully. Shape: {df.shape}")
     return df
 
 
